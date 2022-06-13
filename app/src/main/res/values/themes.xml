@@ -11,6 +11,12 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <item name="textInputStyle">@style/MyInputStyle</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="MyInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">#55DA0909</item>
     </style>
 </resources>

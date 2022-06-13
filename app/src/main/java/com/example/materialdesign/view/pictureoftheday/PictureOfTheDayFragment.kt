@@ -1,5 +1,7 @@
 package com.example.materialdesign.view.pictureoftheday
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,6 +39,16 @@ class PictureOfTheDayFragment : Fragment() {
             renderData(it)
         }
         viewModel.sendServerRequest()
+
+        onWikiClick()
+    }
+
+    private fun onWikiClick(){
+        binding.inputLayout.setEndIconOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
+            })
+        }
     }
 
     private fun renderData(appState: AppState){
