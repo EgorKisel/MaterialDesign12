@@ -48,7 +48,9 @@ class PictureOfTheDayFragment : Fragment() {
                //
             }
             is AppState.Success -> {
-                binding.imageView.load(appState.serverResponseData.hdurl)
+                binding.imageView.load(appState.serverResponseData.hdurl){
+
+                }
             }
         }
     }
