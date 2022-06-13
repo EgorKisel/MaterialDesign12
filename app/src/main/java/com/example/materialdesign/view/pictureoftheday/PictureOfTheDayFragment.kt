@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.materialdesign.databinding.FragmentPictureOfTheDayBinding
 import com.example.materialdesign.viewmodel.AppState
 import com.example.materialdesign.viewmodel.PictureOfTheDayViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -41,6 +43,22 @@ class PictureOfTheDayFragment : Fragment() {
         viewModel.sendServerRequest()
 
         onWikiClick()
+        setBottomSheetBehavior()
+
+    }
+    private fun setBottomSheetBehavior(){
+        val behavior = (binding.lifeHack.bottomSheetContainer.layoutParams as CoordinatorLayout.LayoutParams).behavior as BottomSheetBehavior
+        behavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback(){
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+            }
+
+        })
     }
 
     private fun onWikiClick(){
@@ -63,6 +81,8 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.imageView.load(appState.serverResponseData.hdurl){
 
                 }
+                binding.lifeHack.title.text = appState.serverResponseData.title
+                binding.lifeHack.explanation.text = appState.serverResponseData.explanation
             }
         }
     }
