@@ -14,7 +14,12 @@
 
         <item name="textInputStyle">@style/MyInputStyle</item>
         <item name="bottomAppBarStyle">@style/MyBottomAppBarStyle</item>
+        <item name="chipStyle">@style/MyChipStyle</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="MyChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+
     </style>
 
     <style name="MyInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

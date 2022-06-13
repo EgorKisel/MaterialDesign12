@@ -18,6 +18,10 @@ class PictureOfTheDayViewModel(
         liveDataForViewToObserve.postValue(AppState.Loading(null))
         retrofitImpl.getRetrofitImpl().getPictureOfTheDay(BuildConfig.NASA_API_KEY).enqueue(callback)
     }
+    fun sendServerRequest2(){
+        liveDataForViewToObserve.postValue(AppState.Loading(null))
+        retrofitImpl.getRetrofitImpl().getPictureOfTheDayTemp(BuildConfig.NASA_API_KEY).enqueue(callback)
+    }
     private val callback = object : Callback<PictureOfTheDayServerResponseData>{
         override fun onResponse(
             call: Call<PictureOfTheDayServerResponseData>,

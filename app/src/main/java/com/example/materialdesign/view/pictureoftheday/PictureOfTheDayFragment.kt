@@ -1,6 +1,7 @@
 package com.example.materialdesign.view.pictureoftheday
 
 import android.content.Intent
+import android.icu.util.LocaleData
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -13,10 +14,14 @@ import coil.load
 import com.example.materialdesign.R
 import com.example.materialdesign.databinding.FragmentPictureOfTheDayBinding
 import com.example.materialdesign.view.MainActivity
+import com.example.materialdesign.view.settings.SettingsFragment
 import com.example.materialdesign.viewmodel.AppState
 import com.example.materialdesign.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import java.time.LocalDate
+import javax.xml.validation.SchemaFactory.newInstance
+
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -30,6 +35,10 @@ class PictureOfTheDayFragment : Fragment() {
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -46,9 +55,12 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.app_bar_fav -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
-            R.id.app_bar_settings -> Toast.makeText(context, "Settings", Toast.LENGTH_SHORT).show()
+            R.id.app_bar_settings -> requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container,SettingsFragment.newInstance())
+                .addToBackStack("")
+                .commit()
             android.R.id.home -> {
                 BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "")
             }
@@ -80,6 +92,21 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_plus_fab))
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
+        }
+        binding.chip1.setOnClickListener {
+            viewModel.getLiveDataForViewToObserve().observe(viewLifecycleOwner) {
+                renderData(it)
+            }
+            viewModel.sendServerRequest()
+        }
+        binding.chip2.setOnClickListener {
+            viewModel.getLiveDataForViewToObserve().observe(viewLifecycleOwner) {
+                renderData(it)
+            }
+            viewModel.sendServerRequest2()
+        }
+        binding.chip3.setOnClickListener {
+            Toast.makeText(context, "setOnClickListener", Toast.LENGTH_SHORT).show()
         }
     }
     private fun setBottomSheetBehavior(){
@@ -113,14 +140,14 @@ class PictureOfTheDayFragment : Fragment() {
     private fun renderData(appState: AppState){
         when(appState){
             is AppState.Error -> {
-                //
+                binding.imageView.load(R.drawable.cat)
             }
             is AppState.Loading -> {
-               //
+                binding.imageView.load(R.drawable.loading)
             }
             is AppState.Success -> {
                 binding.imageView.load(appState.serverResponseData.hdurl){
-
+                    placeholder(R.drawable.loading)
                 }
                 binding.lifeHack.title.text = appState.serverResponseData.title
                 binding.lifeHack.explanation.text = appState.serverResponseData.explanation
