@@ -12,22 +12,19 @@
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip1"
-            android:tag="chip1"
+            android:id="@+id/chip_theme_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/today"/>
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip2"
-            android:tag="chip2"
+            android:id="@+id/chip_theme_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/yesterday"/>
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip3"
-            android:tag="chip3"
+            android:id="@+id/chip_theme_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/the_day_before_yesterday"/>

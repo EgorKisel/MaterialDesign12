@@ -1,15 +1,17 @@
 package com.example.materialdesign.view.settings
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.materialdesign.R
-import com.example.materialdesign.databinding.FragmentPictureOfTheDayBinding
 import com.example.materialdesign.databinding.FragmentSettingsBinding
 import com.example.materialdesign.utils.Parameters
+
+const val KEY_SETTINGS = "KEY_SETTINGS"
+const val KEY_THEME = "KEY_THEME"
 
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
@@ -28,17 +30,20 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.chip1.setOnClickListener {
+        binding.chipTheme1.setOnClickListener {
             Parameters.getInstance().theme = R.style.MyGreenTheme
             requireActivity().recreate()
+            putTheme(R.style.MyGreenTheme)
         }
-        binding.chip2.setOnClickListener {
+        binding.chipTheme2.setOnClickListener {
             Parameters.getInstance().theme = R.style.MyPinkTheme
             requireActivity().recreate()
+            putTheme(R.style.MyPinkTheme)
         }
-        binding.chip3.setOnClickListener {
+        binding.chipTheme3.setOnClickListener {
             Parameters.getInstance().theme = R.style.MyRedTheme
             requireActivity().recreate()
+            putTheme(R.style.MyRedTheme)
         }
 
     }
@@ -52,5 +57,13 @@ class SettingsFragment : Fragment() {
         @JvmStatic
         fun newInstance() =
             SettingsFragment()
+    }
+
+    private fun putTheme(key: Int) {
+        activity?.let {
+            it.getSharedPreferences(KEY_SETTINGS, Context.MODE_PRIVATE).edit()
+                .putInt(KEY_THEME, key).apply()
+            it.recreate()
+        }
     }
 }
