@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.materialdesign.R
 import com.example.materialdesign.databinding.FragmentPictureOfTheDayBinding
 import com.example.materialdesign.databinding.FragmentSettingsBinding
+import com.example.materialdesign.utils.Parameters
 
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
@@ -27,13 +29,16 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.chip1.setOnClickListener {
-            Toast.makeText(context, "setOnClickListener", Toast.LENGTH_SHORT).show()
+            Parameters.getInstance().theme = R.style.MyGreenTheme
+            requireActivity().recreate()
         }
         binding.chip2.setOnClickListener {
-            Toast.makeText(context, "setOnClickListener", Toast.LENGTH_SHORT).show()
+            Parameters.getInstance().theme = R.style.MyPinkTheme
+            requireActivity().recreate()
         }
         binding.chip3.setOnClickListener {
-            Toast.makeText(context, "setOnClickListener", Toast.LENGTH_SHORT).show()
+            Parameters.getInstance().theme = R.style.MyRedTheme
+            requireActivity().recreate()
         }
 
     }

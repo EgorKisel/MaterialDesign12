@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.materialdesign.R
 import com.example.materialdesign.databinding.FragmentPictureOfTheDayBinding
+import com.example.materialdesign.utils.Parameters
 import com.example.materialdesign.view.MainActivity
 import com.example.materialdesign.view.settings.SettingsFragment
 import com.example.materialdesign.viewmodel.AppState
@@ -25,7 +26,7 @@ import javax.xml.validation.SchemaFactory.newInstance
 
 class PictureOfTheDayFragment : Fragment() {
 
-    var isMain = true
+    private var isMain = true
 
     private var _binding: FragmentPictureOfTheDayBinding?=null
     private val binding: FragmentPictureOfTheDayBinding

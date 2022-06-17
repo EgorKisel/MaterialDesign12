@@ -9,6 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="color_gray">#66000000</color>
+    <color name="red">#ff4234</color>
+    <color name="pink">#ea0080</color>
+    <color name="green">#97e800</color>
 
     <color name="red_100">#fbc7cc</color>
     <color name="red_200">#fb4844</color>
@@ -33,5 +36,8 @@
     <color name="pink_700">#c10075</color>
     <color name="pink_800">#ab0070</color>
     <color name="pink_900">#820066</color>
+    <color name="background_bottom_sheet_layout">#f6f6fa</color>
+    <color name="bottom_sheet_layout_view_background">#663b4351</color>
+    <color name="bottom_sheet_layout_textview_textColor">#000</color>
 
 </resources>
