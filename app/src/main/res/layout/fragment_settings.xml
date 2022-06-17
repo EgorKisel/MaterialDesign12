@@ -15,19 +15,19 @@
             android:id="@+id/chip_theme_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/today"/>
+            android:text="@string/theme_1"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_theme_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/yesterday"/>
+            android:text="@string/theme_2"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_theme_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/the_day_before_yesterday"/>
+            android:text="@string/theme_3"/>
 
     </com.google.android.material.chip.ChipGroup>
 </LinearLayout>

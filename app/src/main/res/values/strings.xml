@@ -12,5 +12,8 @@
     <string name="today">today</string>
     <string name="yesterday">yesterday</string>
     <string name="the_day_before_yesterday">the_day_before_yesterday</string>
+    <string name="theme_1">theme_1</string>
+    <string name="theme_2">theme_2</string>
+    <string name="theme_3">theme_3</string>
 
 </resources>
