@@ -1,11 +1,13 @@
 package com.example.materialdesign.view.pictureoftheday
 
 import android.content.Intent
-import android.icu.util.LocaleData
+import android.icu.util.Calendar
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -13,15 +15,14 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.materialdesign.R
 import com.example.materialdesign.databinding.FragmentPictureOfTheDayBinding
-import com.example.materialdesign.utils.Parameters
 import com.example.materialdesign.view.MainActivity
 import com.example.materialdesign.view.settings.SettingsFragment
 import com.example.materialdesign.viewmodel.AppState
 import com.example.materialdesign.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import java.time.LocalDate
-import javax.xml.validation.SchemaFactory.newInstance
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PictureOfTheDayFragment : Fragment() {
@@ -69,6 +70,7 @@ class PictureOfTheDayFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
@@ -76,7 +78,7 @@ class PictureOfTheDayFragment : Fragment() {
         viewModel.getLiveDataForViewToObserve().observe(viewLifecycleOwner) {
             renderData(it)
         }
-        viewModel.sendServerRequest()
+        viewModel.sendServerRequest(takeDate(0))
 
         onWikiClick()
         setBottomSheetBehavior()
@@ -104,12 +106,22 @@ class PictureOfTheDayFragment : Fragment() {
             viewModel.getLiveDataForViewToObserve().observe(viewLifecycleOwner) {
                 renderData(it)
             }
-            viewModel.sendServerRequest2()
+            viewModel.sendServerRequest(takeDate(-1))
         }
         binding.chip3.setOnClickListener {
             Toast.makeText(context, "setOnClickListener", Toast.LENGTH_SHORT).show()
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun takeDate(count: Int): String {
+        val currentDate = Calendar.getInstance()
+        currentDate.add(Calendar.DAY_OF_MONTH, count)
+        val format1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        format1.timeZone = TimeZone.getTimeZone("EST")
+        return format1.format(currentDate.time)
+    }
+
     private fun setBottomSheetBehavior(){
         val behavior = (binding.lifeHack.bottomSheetContainer.layoutParams as CoordinatorLayout.LayoutParams).behavior as BottomSheetBehavior
         behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED

@@ -14,14 +14,20 @@ class PictureOfTheDayViewModel(
     private val retrofitImpl: PictureOfTheDayRetrofitImpl = PictureOfTheDayRetrofitImpl()
 ) : ViewModel() {
     fun getLiveDataForViewToObserve() = liveDataForViewToObserve
-    fun sendServerRequest(){
+    fun sendServerRequest() {
         liveDataForViewToObserve.postValue(AppState.Loading(null))
         retrofitImpl.getRetrofitImpl().getPictureOfTheDay(BuildConfig.NASA_API_KEY).enqueue(callback)
     }
-    fun sendServerRequest2(){
-        liveDataForViewToObserve.postValue(AppState.Loading(null))
-        retrofitImpl.getRetrofitImpl().getPictureOfTheDayTemp(BuildConfig.NASA_API_KEY).enqueue(callback)
+    fun sendServerRequest(date:String) {
+        liveDataForViewToObserve.value = AppState.Loading(0)
+        val apiKey: String = BuildConfig.NASA_API_KEY
+        if (apiKey.isBlank()) {
+            liveDataForViewToObserve.value = AppState.Error(Throwable("wrong key"))
+        } else {
+            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey,date).enqueue(callback)
+        }
     }
+
     private val callback = object : Callback<PictureOfTheDayServerResponseData>{
         override fun onResponse(
             call: Call<PictureOfTheDayServerResponseData>,

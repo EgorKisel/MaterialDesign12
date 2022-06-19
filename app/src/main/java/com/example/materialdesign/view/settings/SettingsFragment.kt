@@ -33,17 +33,17 @@ class SettingsFragment : Fragment() {
         binding.chipTheme1.setOnClickListener {
             Parameters.getInstance().theme = R.style.MyGreenTheme
             requireActivity().recreate()
-            putTheme(R.style.MyGreenTheme)
+           // putTheme(R.style.MyGreenTheme)
         }
         binding.chipTheme2.setOnClickListener {
             Parameters.getInstance().theme = R.style.MyPinkTheme
             requireActivity().recreate()
-            putTheme(R.style.MyPinkTheme)
+           // putTheme(R.style.MyPinkTheme)
         }
         binding.chipTheme3.setOnClickListener {
             Parameters.getInstance().theme = R.style.MyRedTheme
             requireActivity().recreate()
-            putTheme(R.style.MyRedTheme)
+           // putTheme(R.style.MyRedTheme)
         }
 
     }
@@ -65,5 +65,10 @@ class SettingsFragment : Fragment() {
                 .putInt(KEY_THEME, key).apply()
             it.recreate()
         }
+    }
+    private fun getNumTheme(): Int {
+        return activity?.let {
+            it.getSharedPreferences(KEY_SETTINGS, Context.MODE_PRIVATE).getInt(KEY_THEME, 0)
+        } ?: 0
     }
 }
