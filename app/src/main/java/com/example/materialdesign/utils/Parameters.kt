@@ -4,7 +4,7 @@ import com.example.materialdesign.R
 
 class Parameters {
     var resetFragment: Boolean = false
-    var theme: Int = R.style.Theme_MaterialDesign
+    var theme: Int = R.style.MyRedTheme
 
     companion object{
         @Volatile

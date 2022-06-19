@@ -32,15 +32,15 @@
 
 
 
-    <style name="MyRedTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="MyRedTheme" parent="Theme.MaterialDesign">
         <item name="superColor">@color/red</item>
     </style>
 
-    <style name="MyPinkTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="MyPinkTheme" parent="Theme.MaterialDesign">
         <item name="superColor">@color/pink</item>
     </style>
 
-    <style name="MyGreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="MyGreenTheme" parent="Theme.MaterialDesign">
         <item name="superColor">@color/green</item>
     </style>
 

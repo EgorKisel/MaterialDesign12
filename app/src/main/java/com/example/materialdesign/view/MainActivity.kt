@@ -16,7 +16,7 @@ const val KEY_THEME_RED = 3
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(getThemePrefs())
+        setTheme(Parameters.getInstance().theme)
         setContentView(R.layout.activity_main)
         if (savedInstanceState==null){
             supportFragmentManager.beginTransaction()
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
     }
-    private fun getThemePrefs(): Int {
+    private fun getThemePreference(): Int {
         return when (getSharedPreferences(KEY_SETTINGS, MODE_PRIVATE).getInt(
             KEY_THEME,
             KEY_THEME_TEAL
