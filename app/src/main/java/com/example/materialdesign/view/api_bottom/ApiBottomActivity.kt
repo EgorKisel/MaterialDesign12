@@ -15,7 +15,6 @@ class ApiBottomActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityApiBottomBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         init()
     }
 

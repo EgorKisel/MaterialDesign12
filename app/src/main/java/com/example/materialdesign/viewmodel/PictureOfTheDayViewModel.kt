@@ -1,5 +1,6 @@
 package com.example.materialdesign.viewmodel
 
+import android.os.Build
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.materialdesign.BuildConfig
@@ -8,6 +9,10 @@ import com.example.materialdesign.model.PictureOfTheDayServerResponseData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class PictureOfTheDayViewModel(
     private val liveDataForViewToObserve: MutableLiveData<AppState> = MutableLiveData(),
@@ -25,6 +30,29 @@ class PictureOfTheDayViewModel(
             liveDataForViewToObserve.value = AppState.Error(Throwable("wrong key"))
         } else {
             retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey,date).enqueue(callback)
+        }
+    }
+
+    fun sendServerRequest(day:Int) {
+        val date = getDate(day)
+        liveDataForViewToObserve.value = AppState.Loading(0)
+        val apiKey: String = BuildConfig.NASA_API_KEY
+        if (apiKey.isBlank()) {
+            liveDataForViewToObserve.value = AppState.Error(Throwable("wrong key"))
+        } else {
+            retrofitImpl.getPictureOfTheDay(apiKey, date, callback)
+        }
+    }
+    private fun getDate(day: Int): String {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val yesterday = LocalDateTime.now().minusDays(day.toLong())
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            return yesterday.format(formatter)
+        } else {
+            val cal: Calendar = Calendar.getInstance()
+            val s = SimpleDateFormat("yyyy-MM-dd")
+            cal.add(Calendar.DAY_OF_YEAR, (-day))
+            return s.format(cal.time)
         }
     }
 

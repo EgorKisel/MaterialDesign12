@@ -30,8 +30,6 @@
         <item name="bottomNavigationStyle">@style/MyBottomNavigationStyle</item>
     </style>
 
-
-
     <style name="MyRedTheme" parent="Theme.MaterialDesign">
         <item name="superColor">@color/red</item>
     </style>
