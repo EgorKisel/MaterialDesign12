@@ -1,10 +1,12 @@
 package com.example.materialdesign.utils
 
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.materialdesign.R
 
 class Parameters {
     var resetFragment: Boolean = false
     var theme: Int = R.style.MyRedTheme
+    var mode: Int = AppCompatDelegate.MODE_NIGHT_NO
 
     companion object{
         @Volatile

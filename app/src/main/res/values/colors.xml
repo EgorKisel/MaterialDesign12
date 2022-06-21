@@ -39,5 +39,8 @@
     <color name="background_bottom_sheet_layout">#f6f6fa</color>
     <color name="bottom_sheet_layout_view_background">#663b4351</color>
     <color name="bottom_sheet_layout_textview_textColor">#000</color>
+    
+    <color name="colorAccent40Alfa">#66FBC7CC</color>
+    <color name="colorAccent">#F81707</color>
 
 </resources>

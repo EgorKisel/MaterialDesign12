@@ -12,4 +12,5 @@
     <dimen name="bottom_sheet_layout_textview_paddingStart">10dp</dimen>
     <dimen name="bottom_sheet_layout_textview_layout_marginTop">5dp</dimen>
     <dimen name="bottom_sheet_layout_textview_paddingEnd">10dp</dimen>
+    <dimen name="layout_marginBottom_fragment_earth">100dp</dimen>
 </resources>
