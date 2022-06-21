@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="MyBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
-
+            <item name="itemRippleColor">@color/green</item>
     </style>
 
     <style name="MyTextAppearance" parent="TextAppearance.MaterialComponents.Body2">

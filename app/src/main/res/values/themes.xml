@@ -25,9 +25,9 @@
         <item name="materialButtonStyle">@style/MyButtonStyle</item>
         <item name="textInputStyle">@style/MyInputStyle</item>
         <item name="bottomAppBarStyle">@style/MyBottomAppBarStyle</item>
-        <item name="bottomNavigationStyle">@style/MyBottomNavigationStyle</item>
         <item name="chipStyle">@style/MyChipStyle</item>
         <item name="superColor">@color/purple_500</item>
+        <item name="bottomNavigationStyle">@style/MyBottomNavigationStyle</item>
     </style>
 
 
