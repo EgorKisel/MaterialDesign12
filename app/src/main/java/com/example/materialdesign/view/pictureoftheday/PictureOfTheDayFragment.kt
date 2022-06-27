@@ -9,22 +9,16 @@ import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.materialdesign.DAY_BEFORE_YESTERDAY
 import com.example.materialdesign.R
 import com.example.materialdesign.databinding.FragmentPictureOfTheDayBinding
-import com.example.materialdesign.view.MainActivity
-import com.example.materialdesign.view.api.EarthFragment
-import com.example.materialdesign.view.api.MarsFragment
-import com.example.materialdesign.view.api.SystemFragment
+import com.example.materialdesign.view.layouts.CollapsingToolbarFragment
+import com.example.materialdesign.view.pictureoftheday.PictureOfTheDayFragment.Companion.newInstance
 import com.example.materialdesign.view.settings.SettingsFragment
 import com.example.materialdesign.viewmodel.AppState
 import com.example.materialdesign.viewmodel.PictureOfTheDayViewModel
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,9 +27,9 @@ class PictureOfTheDayFragment : Fragment() {
 
     private var isMain = true
 
-    private var _binding: FragmentPictureOfTheDayBinding?=null
+    private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding: FragmentPictureOfTheDayBinding
-        get(){
+        get() {
             return _binding!!
         }
 
@@ -64,7 +58,7 @@ class PictureOfTheDayFragment : Fragment() {
         when (item.itemId) {
             R.id.app_bar_fav -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
             R.id.app_bar_settings -> requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container,SettingsFragment.newInstance())
+                .replace(R.id.container, SettingsFragment.newInstance())
                 .addToBackStack("")
                 .commit()
             android.R.id.home -> {
@@ -109,6 +103,9 @@ class PictureOfTheDayFragment : Fragment() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.action_bottom_view_earth -> {
+//                    requireActivity().supportFragmentManager.beginTransaction()
+//                        .replace(R.id.container, EarthFragment.newInstance(), null)
+//                        .addToBackStack("").commit()
                     binding.imageView.load(R.drawable.bg_earth)
                 }
                 R.id.action_bottom_view_mars -> {
@@ -117,11 +114,17 @@ class PictureOfTheDayFragment : Fragment() {
                 R.id.action_bottom_view_system -> {
                     binding.imageView.load(R.drawable.bg_system)
                 }
+                R.id.action_bottom_collapsingToolbarLayout -> {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, CollapsingToolbarFragment.newInstance(), null)
+                        .addToBackStack("").commit()
+                }
             }
             true
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun onChipClick() {
         binding.chip1.setOnClickListener {
             viewModel.getLiveDataForViewToObserve().observe(viewLifecycleOwner) {
@@ -172,16 +175,17 @@ class PictureOfTheDayFragment : Fragment() {
 //        })
 //    }
 
-    private fun onWikiClick(){
+    private fun onWikiClick() {
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
+                data =
+                    Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
     }
 
-    private fun renderData(appState: AppState){
-        when(appState){
+    private fun renderData(appState: AppState) {
+        when (appState) {
             is AppState.Error -> {
                 binding.imageView.load(R.drawable.cat)
             }
@@ -189,7 +193,7 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.imageView.load(R.drawable.loading)
             }
             is AppState.Success -> {
-                binding.imageView.load(appState.serverResponseData.hdurl){
+                binding.imageView.load(appState.serverResponseData.hdurl) {
                     placeholder(R.drawable.loading)
                 }
 //                binding.lifeHack.title.text = appState.serverResponseData.title

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.materialdesign.R
+import com.example.materialdesign.view.pictureoftheday.PictureOfTheDayFragment
 
 class EarthFragment: Fragment() {
     override fun onCreateView(
@@ -13,5 +14,12 @@ class EarthFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_earth, container, false)
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance() =
+            EarthFragment()
     }
 }
