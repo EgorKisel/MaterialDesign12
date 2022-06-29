@@ -10,12 +10,13 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.TransitionManager
 import coil.load
 import com.example.materialdesign.DAY_BEFORE_YESTERDAY
 import com.example.materialdesign.R
 import com.example.materialdesign.databinding.FragmentPictureOfTheDayBinding
+import com.example.materialdesign.view.TankFragment
 import com.example.materialdesign.view.layouts.CollapsingToolbarFragment
-import com.example.materialdesign.view.pictureoftheday.PictureOfTheDayFragment.Companion.newInstance
 import com.example.materialdesign.view.settings.SettingsFragment
 import com.example.materialdesign.viewmodel.AppState
 import com.example.materialdesign.viewmodel.PictureOfTheDayViewModel
@@ -24,8 +25,6 @@ import java.util.*
 
 
 class PictureOfTheDayFragment : Fragment() {
-
-    private var isMain = true
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding: FragmentPictureOfTheDayBinding
@@ -101,11 +100,9 @@ class PictureOfTheDayFragment : Fragment() {
 
     private fun onBottomNavigationViewClick() {
         binding.bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
+
+            when(it.itemId) {
                 R.id.action_bottom_view_earth -> {
-//                    requireActivity().supportFragmentManager.beginTransaction()
-//                        .replace(R.id.container, EarthFragment.newInstance(), null)
-//                        .addToBackStack("").commit()
                     binding.imageView.load(R.drawable.bg_earth)
                 }
                 R.id.action_bottom_view_mars -> {
@@ -117,6 +114,11 @@ class PictureOfTheDayFragment : Fragment() {
                 R.id.action_bottom_collapsingToolbarLayout -> {
                     requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.container, CollapsingToolbarFragment.newInstance(), null)
+                        .addToBackStack("").commit()
+                }
+                R.id.tank -> {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, TankFragment.newInstance(), null)
                         .addToBackStack("").commit()
                 }
             }

@@ -3,7 +3,6 @@ package com.example.materialdesign.view.layouts.behaviors
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.appbar.AppBarLayout
 import kotlin.math.abs

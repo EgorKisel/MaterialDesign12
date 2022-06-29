@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import com.google.android.material.appbar.AppBarLayout
 import kotlin.math.abs
 
 class TextBehavior(context: Context, attr: AttributeSet?=null):
