@@ -8,7 +8,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.appbar.AppBarLayout
 import kotlin.math.abs
 
-class WikiBehavior(context: Context, attr: AttributeSet?=null):
+class TextBehavior(context: Context, attr: AttributeSet?=null):
     CoordinatorLayout.Behavior<View>(context,attr) {
 
     override fun layoutDependsOn(
@@ -16,7 +16,7 @@ class WikiBehavior(context: Context, attr: AttributeSet?=null):
         child: View,
         dependency: View
     ): Boolean {
-        return dependency is AppBarLayout
+        return dependency is AppCompatImageView
     }
 
     override fun onDependentViewChanged(
@@ -25,8 +25,9 @@ class WikiBehavior(context: Context, attr: AttributeSet?=null):
         dependency: View
     ): Boolean {
 
-        if(dependency is AppBarLayout){
-            child.alpha = 1- abs(dependency.y*2/dependency.height.toFloat())
+        if(dependency is AppCompatImageView){
+            child.alpha = 1- dependency.x
+            child.alpha = 1- abs(dependency.x*2/dependency.height.toFloat())
         }
         return super.onDependentViewChanged(parent, child, dependency)
     }
