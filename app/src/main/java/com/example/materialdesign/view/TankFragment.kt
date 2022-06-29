@@ -1,20 +1,18 @@
 package com.example.materialdesign.view
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.transition.ChangeBounds
-import androidx.transition.Explode
-import androidx.transition.TransitionManager
-import androidx.transition.TransitionSet
+import androidx.transition.*
 import com.example.materialdesign.databinding.FragmentTankBinding
 
 
 class TankFragment: Fragment() {
 
-    private var flag = false
+    private var flag = true
 
     private var _binding: FragmentTankBinding? = null
     private val binding: FragmentTankBinding
@@ -32,11 +30,10 @@ class TankFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tankTransaction()
-
+        tanksTransaction()
     }
 
-    private fun tankTransaction() {
+    private fun tanksTransaction() {
         binding.myTank.setOnClickListener {
             val myTransitionSet = TransitionSet()
             val myTransition = Explode()
@@ -53,8 +50,22 @@ class TankFragment: Fragment() {
                 binding.myTank.visibility = View.GONE
             }
         }
-    }
+        binding.myTank2.setOnClickListener {
+            val transitionExplode = Explode()
+            val rect = Rect()
+            it.getGlobalVisibleRect(rect)
+            transitionExplode.epicenterCallback = object : Transition.EpicenterCallback(){
+                override fun onGetEpicenter(transition: Transition): Rect {
+                    return rect
+                }
 
+            }
+            binding.myTank.visibility = View.GONE
+            binding.myTank3.visibility = View.GONE
+            binding.myTank4.visibility = View.GONE
+            binding.myTank5.visibility = View.GONE
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -68,19 +79,15 @@ class TankFragment: Fragment() {
             TankFragment()
     }
 
+// Пробую переместить танк в место клика
 //    private var xDelta = 0
 //    private  var yDelta = 0
 //    private val touchListener = OnTouchListener { view, event ->
 //        val x = event.rawX.toInt()
 //        val y = event.rawY.toInt()
 //        when (event.action and MotionEvent.ACTION_MASK) {
-//            MotionEvent.ACTION_DOWN -> {
-//                val lParams = view.layoutParams as FrameLayout.LayoutParams
-//                xDelta = x - lParams.leftMargin
-//                yDelta = y - lParams.topMargin
-//            }
 //            MotionEvent.ACTION_MOVE -> {
-//                if (x - xDelta + view.width <= binding.tankGame.getWidth() && y - yDelta + view.height <= container.getHeight() && x - xDelta >= 0 && y - yDelta >= 0) {
+//                if (x - xDelta + view.width <= binding.myTank.getWidth() && y - yDelta + view.height <= container.getHeight() && x - xDelta >= 0 && y - yDelta >= 0) {
 //                    val layoutParams = view.layoutParams as FrameLayout.LayoutParams
 //                    layoutParams.leftMargin = x - xDelta
 //                    layoutParams.topMargin = y - yDelta
@@ -90,7 +97,7 @@ class TankFragment: Fragment() {
 //                }
 //            }
 //        }
-//        binding.tankGame.invalidate()
+//        binding.myTank.invalidate()
 //        true
 //    }
 
