@@ -2,9 +2,12 @@ package com.example.materialdesign.view
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.transition.*
 import com.example.materialdesign.databinding.FragmentTankBinding
@@ -66,6 +69,24 @@ class TankFragment: Fragment() {
             binding.myTank3.visibility = View.GONE
             binding.myTank4.visibility = View.GONE
             binding.myTank5.visibility = View.GONE
+        }
+        binding.myTank3.setOnClickListener {
+            val changeBounds = ChangeBounds()
+            val path = ArcMotion()
+            path.maximumAngle = 90F
+            changeBounds.duration = 2500L
+            changeBounds.setPathMotion(path)
+            TransitionManager.beginDelayedTransition(binding.root, changeBounds)
+            flag = !flag
+            if (flag){
+                val params = (binding.myTank3.layoutParams as FrameLayout.LayoutParams)
+                params.gravity = Gravity.TOP or Gravity.END
+                binding.myTank3.layoutParams = params
+            }else{
+                val params = (binding.myTank3.layoutParams as FrameLayout.LayoutParams)
+                params.gravity = Gravity.BOTTOM or Gravity.START
+                binding.myTank3.layoutParams = params
+            }
         }
     }
 
