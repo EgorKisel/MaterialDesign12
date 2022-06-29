@@ -6,11 +6,15 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
 import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import coil.load
 import com.example.materialdesign.DAY_BEFORE_YESTERDAY
 import com.example.materialdesign.R
@@ -25,6 +29,8 @@ import java.util.*
 
 
 class PictureOfTheDayFragment : Fragment() {
+
+    var flag = false
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding: FragmentPictureOfTheDayBinding
@@ -202,6 +208,21 @@ class PictureOfTheDayFragment : Fragment() {
 //                binding.lifeHack.explanation.text = appState.serverResponseData.explanation
                 if (appState.serverResponseData.mediaType == "video"){
                     showAVideoUrl(appState.serverResponseData.hdurl)
+                }
+                binding.imageView.setOnClickListener {
+                    flag = !flag
+                    val cb = ChangeBounds()
+                    val cit = ChangeImageTransform()
+                    val transitionSet = TransitionSet()
+                    transitionSet.addTransition(cb)
+                    transitionSet.addTransition(cit)
+
+                    TransitionManager.beginDelayedTransition(binding.root, transitionSet)
+                    if (flag){
+                        binding.imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                    }else{
+                        binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                    }
                 }
             }
         }

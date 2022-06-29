@@ -60,6 +60,7 @@ class TankFragment: Fragment() {
                 }
 
             }
+            transitionExplode.duration = 2000L
             TransitionManager.beginDelayedTransition(binding.root, transitionExplode)
             binding.myTank.visibility = View.GONE
             binding.myTank3.visibility = View.GONE
