@@ -198,9 +198,26 @@ class PictureOfTheDayFragment : Fragment() {
                 }
 //                binding.lifeHack.title.text = appState.serverResponseData.title
 //                binding.lifeHack.explanation.text = appState.serverResponseData.explanation
+                if (appState.serverResponseData.mediaType == "video"){
+                    showAVideoUrl(appState.serverResponseData.hdurl)
+                }
             }
         }
     }
+
+    private fun showAVideoUrl(videoUrl: String) = with(binding) {
+        with(binding){
+            imageView.visibility = View.GONE
+            videoOfTheDay.visibility = View.VISIBLE
+            videoOfTheDay.text = "Сегодня у нас без картинки дня, но есть видео дня! " +
+                    "${videoUrl.toString()} \n кликни >ЗДЕСЬ< чтобы открыть в новом окне"
+            videoOfTheDay.setOnClickListener {
+                val i = Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(videoUrl)
+                }
+                startActivity(i)
+            }
+        } }
 
     override fun onDestroy() {
         super.onDestroy()
