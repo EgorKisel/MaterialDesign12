@@ -60,6 +60,7 @@ class TankFragment: Fragment() {
                 }
 
             }
+            TransitionManager.beginDelayedTransition(binding.root, transitionExplode)
             binding.myTank.visibility = View.GONE
             binding.myTank3.visibility = View.GONE
             binding.myTank4.visibility = View.GONE
