@@ -48,7 +48,7 @@
 
         app:endIconMode="custom"
         app:helperText="@string/wiki_helper_text"
-        app:layout_behavior=".view.layouts.behaviors.FadeAndAnchorBehavior"
+        app:layout_behavior=".view.layouts.behaviors.TextBehavior"
         app:layout_constraintBottom_toTopOf="@+id/image_view"
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="invisible"
