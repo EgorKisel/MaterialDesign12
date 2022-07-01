@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.materialdesign.R
-import com.example.materialdesign.view.settings.SettingsFragment
 
 class BaseFragment: Fragment() {
     override fun onCreateView(

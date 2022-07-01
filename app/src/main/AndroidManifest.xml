@@ -32,7 +32,7 @@
 
         </activity>
         <activity
-            android:name=".view.api_bottom.ApiBottomActivity"
+            android:name=".view.apibottom.ApiBottomActivity"
             android:exported="true">
 
         </activity>

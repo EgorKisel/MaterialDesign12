@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.materialdesign.R
-import com.example.materialdesign.view.pictureoftheday.PictureOfTheDayFragment
 
 class EarthFragment: Fragment() {
     override fun onCreateView(

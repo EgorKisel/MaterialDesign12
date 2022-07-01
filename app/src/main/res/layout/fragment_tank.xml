@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/idid"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/my_tank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/tank" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/my_tank2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/tank"
+        android:layout_gravity="center_vertical" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/my_tank3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/tank"
+        android:layout_gravity="top | end" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/my_tank4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/tank"
+        android:layout_gravity="bottom |end"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/my_tank5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/tank"
+        app:layout_constraintBottom_toTopOf="@id/my_tank"
+        android:layout_gravity="bottom |center" />
+
+</FrameLayout>

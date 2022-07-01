@@ -6,16 +6,21 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import coil.load
 import com.example.materialdesign.DAY_BEFORE_YESTERDAY
 import com.example.materialdesign.R
 import com.example.materialdesign.databinding.FragmentPictureOfTheDayBinding
+import com.example.materialdesign.view.TankFragment
 import com.example.materialdesign.view.layouts.CollapsingToolbarFragment
-import com.example.materialdesign.view.pictureoftheday.PictureOfTheDayFragment.Companion.newInstance
 import com.example.materialdesign.view.settings.SettingsFragment
 import com.example.materialdesign.viewmodel.AppState
 import com.example.materialdesign.viewmodel.PictureOfTheDayViewModel
@@ -25,7 +30,7 @@ import java.util.*
 
 class PictureOfTheDayFragment : Fragment() {
 
-    private var isMain = true
+    var flag = false
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding: FragmentPictureOfTheDayBinding
@@ -101,11 +106,9 @@ class PictureOfTheDayFragment : Fragment() {
 
     private fun onBottomNavigationViewClick() {
         binding.bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
+
+            when(it.itemId) {
                 R.id.action_bottom_view_earth -> {
-//                    requireActivity().supportFragmentManager.beginTransaction()
-//                        .replace(R.id.container, EarthFragment.newInstance(), null)
-//                        .addToBackStack("").commit()
                     binding.imageView.load(R.drawable.bg_earth)
                 }
                 R.id.action_bottom_view_mars -> {
@@ -117,6 +120,11 @@ class PictureOfTheDayFragment : Fragment() {
                 R.id.action_bottom_collapsingToolbarLayout -> {
                     requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.container, CollapsingToolbarFragment.newInstance(), null)
+                        .addToBackStack("").commit()
+                }
+                R.id.tank -> {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, TankFragment.newInstance(), null)
                         .addToBackStack("").commit()
                 }
             }
@@ -198,9 +206,41 @@ class PictureOfTheDayFragment : Fragment() {
                 }
 //                binding.lifeHack.title.text = appState.serverResponseData.title
 //                binding.lifeHack.explanation.text = appState.serverResponseData.explanation
+                if (appState.serverResponseData.mediaType == "video"){
+                    showAVideoUrl(appState.serverResponseData.hdurl)
+                }
+                binding.imageView.setOnClickListener {
+                    flag = !flag
+                    val cb = ChangeBounds()
+                    val cit = ChangeImageTransform()
+                    val transitionSet = TransitionSet()
+                    transitionSet.addTransition(cb)
+                    transitionSet.addTransition(cit)
+
+                    TransitionManager.beginDelayedTransition(binding.root, transitionSet)
+                    if (flag){
+                        binding.imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                    }else{
+                        binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                    }
+                }
             }
         }
     }
+
+    private fun showAVideoUrl(videoUrl: String) = with(binding) {
+        with(binding){
+            imageView.visibility = View.GONE
+            videoOfTheDay.visibility = View.VISIBLE
+            videoOfTheDay.text = "Сегодня у нас без картинки дня, но есть видео дня! " +
+                    "${videoUrl.toString()} \n кликни >ЗДЕСЬ< чтобы открыть в новом окне"
+            videoOfTheDay.setOnClickListener {
+                val i = Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(videoUrl)
+                }
+                startActivity(i)
+            }
+        } }
 
     override fun onDestroy() {
         super.onDestroy()

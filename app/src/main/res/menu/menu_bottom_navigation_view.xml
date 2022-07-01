@@ -16,4 +16,8 @@
         android:id="@+id/action_bottom_collapsingToolbarLayout"
         android:icon="@drawable/ic_baseline_sports_bar_24"
         android:title="@string/collapsingToolbarLayout" />
+    <item
+        android:id="@+id/tank"
+        android:icon="@drawable/ic_baseline_videogame_asset_24"
+        android:title="@string/tank" />
 </menu>

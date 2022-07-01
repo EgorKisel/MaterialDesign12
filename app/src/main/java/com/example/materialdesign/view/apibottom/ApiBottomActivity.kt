@@ -1,4 +1,4 @@
-package com.example.materialdesign.view.api_bottom
+package com.example.materialdesign.view.apibottom
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
