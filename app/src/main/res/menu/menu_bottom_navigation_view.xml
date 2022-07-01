@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_bottom_view_earth"
-        android:icon="@drawable/ic_earth"
-        android:title="@string/earth" />
+        android:id="@+id/recyclerView"
+        android:icon="@drawable/ic_baseline_receipt_24"
+        android:title="@string/recycler" />
     <item
         android:id="@+id/action_bottom_view_mars"
         android:icon="@drawable/ic_mars"

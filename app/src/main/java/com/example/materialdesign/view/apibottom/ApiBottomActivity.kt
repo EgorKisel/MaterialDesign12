@@ -21,7 +21,7 @@ class ApiBottomActivity : AppCompatActivity() {
     private fun init() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.action_bottom_view_earth -> {
+                R.id.recyclerView -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, EarthFragment()).addToBackStack("").commit()
                 }

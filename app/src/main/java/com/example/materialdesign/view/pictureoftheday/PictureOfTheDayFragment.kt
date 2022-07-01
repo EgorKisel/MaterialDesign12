@@ -21,6 +21,7 @@ import com.example.materialdesign.R
 import com.example.materialdesign.databinding.FragmentPictureOfTheDayBinding
 import com.example.materialdesign.view.TankFragment
 import com.example.materialdesign.view.layouts.CollapsingToolbarFragment
+import com.example.materialdesign.view.recycler.RecyclerFragment
 import com.example.materialdesign.view.settings.SettingsFragment
 import com.example.materialdesign.viewmodel.AppState
 import com.example.materialdesign.viewmodel.PictureOfTheDayViewModel
@@ -108,8 +109,10 @@ class PictureOfTheDayFragment : Fragment() {
         binding.bottomNavigationView.setOnItemSelectedListener {
 
             when(it.itemId) {
-                R.id.action_bottom_view_earth -> {
-                    binding.imageView.load(R.drawable.bg_earth)
+                R.id.recyclerView -> {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, RecyclerFragment.newInstance(), null)
+                        .addToBackStack("").commit()
                 }
                 R.id.action_bottom_view_mars -> {
                     binding.imageView.load(R.drawable.bg_mars)
