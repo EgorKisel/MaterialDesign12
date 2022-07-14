@@ -102,7 +102,6 @@ class PictureOfTheDayFragment : Fragment() {
 //                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
 //            }
 //        }
-
     }
 
     private fun onBottomNavigationViewClick() {
