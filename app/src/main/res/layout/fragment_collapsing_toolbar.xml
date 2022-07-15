@@ -75,6 +75,7 @@
 
 
             <TextView
+                android:id="@+id/text_collapsing_toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/large_text" />
