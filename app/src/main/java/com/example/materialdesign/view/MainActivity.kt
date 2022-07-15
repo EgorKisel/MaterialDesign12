@@ -1,8 +1,10 @@
 package com.example.materialdesign.view
 
 import android.content.Context
+import android.content.Intent
 import android.media.MediaCodec.MetricsConstants.MODE
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.materialdesign.R
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         }
         setTheme(getRealStyle(getCurrentTheme()))
         setContentView(R.layout.activity_main)
+
         if (savedInstanceState==null){
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, PictureOfTheDayFragment.newInstance())
@@ -43,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             THEME_RED -> R.style.MyRedTheme
             THEME_PINK -> R.style.MyPinkTheme
             THEME_GREEN -> R.style.MyGreenTheme
-            else -> R.style.MyRedTheme
+            else -> R.style.DynamicColors
         }
     }
     private fun getCurrentTheme(): Int {

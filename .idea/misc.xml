@@ -8,6 +8,7 @@
         <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/drawable/bg_system.xml" value="0.117" />
         <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/drawable/ic_system.xml" value="0.117" />
         <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/drawable/ic_wikipedia.xml" value="0.104" />
+        <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/drawable/splash_background.xml" value="0.1" />
         <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/drawable/swipe_indicator_active.xml" value="0.117" />
         <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/drawable/swipe_indicator_passive.xml" value="0.117" />
         <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/font/sofia.xml" value="0.20572916666666666" />
@@ -16,6 +17,7 @@
         <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/layout/activity_main.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/layout/activity_recycler.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/layout/activity_recycler_item_mars.xml" value="0.1" />
+        <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/layout/activity_splash.xml" value="0.17447916666666666" />
         <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/layout/bottom_navigation_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.1" />
         <entry key="..\:/Users/79652/Downloads/MaterialDesign/app/src/main/res/layout/fragment_base.xml" value="0.17552083333333332" />
