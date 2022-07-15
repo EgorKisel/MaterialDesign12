@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             THEME_RED -> R.style.MyRedTheme
             THEME_PINK -> R.style.MyPinkTheme
             THEME_GREEN -> R.style.MyGreenTheme
-            else -> R.style.MyRedTheme
+            else -> R.style.DynamicColors
         }
     }
     private fun getCurrentTheme(): Int {
