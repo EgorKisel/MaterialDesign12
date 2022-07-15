@@ -30,6 +30,11 @@
         <item name="bottomNavigationStyle">@style/MyBottomNavigationStyle</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.MaterialDesign">
+        <item name="superColor">@color/white</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
     <style name="MyRedTheme" parent="Theme.MaterialDesign">
         <item name="superColor">@color/red</item>
     </style>
