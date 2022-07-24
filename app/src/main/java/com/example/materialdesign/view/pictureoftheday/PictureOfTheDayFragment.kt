@@ -67,10 +67,7 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_fav -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
-            R.id.app_bar_settings -> requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container, SettingsFragment.newInstance())
-                .addToBackStack("")
-                .commit()
+            R.id.app_bar_settings -> navigateTo(SettingsFragment.newInstance())
             android.R.id.home -> {
                 BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "")
             }
@@ -127,11 +124,9 @@ class PictureOfTheDayFragment : Fragment() {
     private fun onBottomNavigationViewClick() {
         binding.bottomNavigationView.setOnItemSelectedListener {
 
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.recyclerView -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, RecyclerFragment.newInstance(), null)
-                        .addToBackStack("").commit()
+                    navigateTo(RecyclerFragment.newInstance())
                 }
                 R.id.action_bottom_view_mars -> {
                     binding.imageView.load(R.drawable.bg_mars)
@@ -140,18 +135,20 @@ class PictureOfTheDayFragment : Fragment() {
                     binding.imageView.load(R.drawable.bg_system)
                 }
                 R.id.action_bottom_collapsingToolbarLayout -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, CollapsingToolbarFragment.newInstance(), null)
-                        .addToBackStack("").commit()
+                    navigateTo(CollapsingToolbarFragment.newInstance())
                 }
                 R.id.tank -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, TankFragment.newInstance(), null)
-                        .addToBackStack("").commit()
+                    navigateTo(TankFragment.newInstance())
                 }
             }
             true
         }
+    }
+
+    private fun navigateTo(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.slide_in, R.anim.slide_out)
+            .replace(R.id.container, fragment).addToBackStack("").commit()
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -228,7 +225,7 @@ class PictureOfTheDayFragment : Fragment() {
                 }
 //                binding.lifeHack.title.text = appState.serverResponseData.title
 //                binding.lifeHack.explanation.text = appState.serverResponseData.explanation
-                if (appState.serverResponseData.mediaType == "video"){
+                if (appState.serverResponseData.mediaType == "video") {
                     showAVideoUrl(appState.serverResponseData.hdurl)
                 }
                 binding.imageView.setOnClickListener {
@@ -240,9 +237,9 @@ class PictureOfTheDayFragment : Fragment() {
                     transitionSet.addTransition(cit)
 
                     TransitionManager.beginDelayedTransition(binding.root, transitionSet)
-                    if (flag){
+                    if (flag) {
                         binding.imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-                    }else{
+                    } else {
                         binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
                     }
                 }
@@ -251,7 +248,7 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun showAVideoUrl(videoUrl: String) = with(binding) {
-        with(binding){
+        with(binding) {
             imageView.visibility = View.GONE
             videoOfTheDay.visibility = View.VISIBLE
             videoOfTheDay.text = "Сегодня у нас без картинки дня, но есть видео дня! " +
@@ -262,7 +259,8 @@ class PictureOfTheDayFragment : Fragment() {
                 }
                 startActivity(i)
             }
-        } }
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
