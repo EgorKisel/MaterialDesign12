@@ -5,6 +5,8 @@ import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
@@ -25,6 +27,8 @@ import com.example.materialdesign.view.recycler.RecyclerFragment
 import com.example.materialdesign.view.settings.SettingsFragment
 import com.example.materialdesign.viewmodel.AppState
 import com.example.materialdesign.viewmodel.PictureOfTheDayViewModel
+import smartdevelop.ir.eram.showcaseviewlib.GuideView
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -78,6 +82,12 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (isAdded)// проверяем, не умер ли фрагент
+                show()
+        }, 500)
+
         //(requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
         viewModel.getLiveDataForViewToObserve().observe(viewLifecycleOwner) {
             renderData(it)
@@ -102,6 +112,16 @@ class PictureOfTheDayFragment : Fragment() {
 //                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
 //            }
 //        }
+    }
+
+    private fun show() {
+        GuideView.Builder(requireContext())
+            .setTitle("Picture of the day")
+            .setContentText("By clicking on this button you will see a photo of the day of NASA")
+            .setTargetView(binding.chip1)
+            .setDismissType(DismissType.outside) //optional - default dismissible by TargetView
+            .build()
+            .show()
     }
 
     private fun onBottomNavigationViewClick() {
